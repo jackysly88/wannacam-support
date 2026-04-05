@@ -43,6 +43,30 @@
             font-size: 15px;
             color: #888;
         }
+        .lang-switcher {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        .lang-btn {
+            display: inline-block;
+            padding: 8px 18px;
+            margin: 0 4px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            border: 1.5px solid #d0c0d8;
+            background: rgba(255,255,255,0.6);
+            color: #666;
+            transition: all 0.2s;
+        }
+        .lang-btn.active {
+            background: linear-gradient(135deg, #e8a0bf, #b088d0);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 2px 8px rgba(176, 136, 208, 0.3);
+        }
+        .lang-btn:hover { transform: translateY(-1px); }
         .card {
             background: rgba(255,255,255,0.85);
             backdrop-filter: blur(10px);
@@ -93,6 +117,8 @@
             color: #aaa;
         }
         .privacy-section p { margin-bottom: 10px; }
+        .lang { display: none; }
+        .lang.active { display: block; }
     </style>
 </head>
 <body>
@@ -102,45 +128,162 @@
                 <svg viewBox="0 0 24 24"><path d="M12 15.2a3.2 3.2 0 1 0 0-6.4 3.2 3.2 0 0 0 0 6.4z"/><path d="M9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/></svg>
             </div>
             <h1>WannaCam</h1>
-            <p class="subtitle">Snap it. Tag it. Want it.</p>
+            <p class="subtitle" id="subtitle">Snap it. Tag it. Want it.</p>
         </div>
 
-        <div class="card">
-            <h2>Support</h2>
-            <p>Thank you for using WannaCam! If you encounter any issues or have suggestions, please don't hesitate to reach out to us. We typically respond within 24 hours.</p>
+        <div class="lang-switcher">
+            <span class="lang-btn active" onclick="switchLang('en')">English</span>
+            <span class="lang-btn" onclick="switchLang('zh-Hans')">简体中文</span>
+            <span class="lang-btn" onclick="switchLang('zh-Hant')">繁體中文</span>
         </div>
 
-        <div class="card">
-            <h2>FAQ</h2>
-            <ul>
-                <li><strong>Does WannaCam require an internet connection?</strong><br>No. WannaCam works entirely offline. All your data stays on your device.</li>
-                <li><strong>Where are my photos stored?</strong><br>Photos are saved to your device's photo library and managed locally via the app's wishlist.</li>
-                <li><strong>Can I recover deleted items?</strong><br>Once deleted, items are removed from both the app and your photo library. This action cannot be undone.</li>
-                <li><strong>How do I switch languages?</strong><br>WannaCam follows your device's system language. It supports English, Simplified Chinese, and Traditional Chinese.</li>
-                <li><strong>How do I share my wishlist?</strong><br>Select items in your wishlist, tap "Generate Image" to create a long-format image, and share it from your Photos library.</li>
-            </ul>
+        <!-- English -->
+        <div class="lang active" id="lang-en">
+            <div class="card">
+                <h2>Support</h2>
+                <p>Thank you for using WannaCam! If you encounter any issues or have suggestions, please don't hesitate to reach out to us. We typically respond within 24 hours.</p>
+            </div>
+            <div class="card">
+                <h2>FAQ</h2>
+                <ul>
+                    <li><strong>Does WannaCam require an internet connection?</strong><br>No. WannaCam works entirely offline. All your data stays on your device.</li>
+                    <li><strong>Where are my photos stored?</strong><br>Photos are saved to your device's photo library and managed locally via the app's wishlist.</li>
+                    <li><strong>Can I recover deleted items?</strong><br>Once deleted, items are removed from both the app and your photo library. This action cannot be undone.</li>
+                    <li><strong>How do I switch languages?</strong><br>WannaCam follows your device's system language. It supports English, Simplified Chinese, and Traditional Chinese.</li>
+                    <li><strong>How do I share my wishlist?</strong><br>Select items in your wishlist, tap "Generate Image" to create a long-format image, and share it from your Photos library.</li>
+                </ul>
+            </div>
+            <div class="card privacy-section">
+                <h2>Privacy Policy</h2>
+                <p>WannaCam respects your privacy. Here is our commitment to you:</p>
+                <p><strong>No data collection.</strong> WannaCam does not collect, store, or transmit any personal information. The app operates entirely offline.</p>
+                <p><strong>No analytics or tracking.</strong> We do not use any third-party analytics, advertising SDKs, or tracking tools.</p>
+                <p><strong>No account required.</strong> You can use all features without creating an account or providing any personal details.</p>
+                <p><strong>Local storage only.</strong> All photos, wish items, tags, and notes are stored exclusively on your device using Apple's Core Data framework. Nothing leaves your device.</p>
+                <p><strong>Camera and photo library access.</strong> WannaCam requests camera access to capture photos and photo library access to save and manage your wish photos. These permissions are used solely for the app's core functionality.</p>
+                <p><strong>Location access.</strong> If you enable the location watermark feature, WannaCam accesses your location only at the moment of capture to stamp the location name on your photo card. Location data is stored locally on your device and is never transmitted.</p>
+            </div>
+            <div class="card center">
+                <h2>Contact Us</h2>
+                <p style="margin-bottom: 20px; color: #555;">We'd love to hear from you.</p>
+                <a href="mailto:wannacam.app@gmail.com" class="contact-btn">Email Us</a>
+            </div>
         </div>
 
-        <div class="card privacy-section">
-            <h2>Privacy Policy</h2>
-            <p>WannaCam respects your privacy. Here is our commitment to you:</p>
-            <p><strong>No data collection.</strong> WannaCam does not collect, store, or transmit any personal information. The app operates entirely offline.</p>
-            <p><strong>No analytics or tracking.</strong> We do not use any third-party analytics, advertising SDKs, or tracking tools.</p>
-            <p><strong>No account required.</strong> You can use all features without creating an account or providing any personal details.</p>
-            <p><strong>Local storage only.</strong> All photos, wish items, tags, and notes are stored exclusively on your device using Apple's Core Data framework. Nothing leaves your device.</p>
-            <p><strong>Camera and photo library access.</strong> WannaCam requests camera access to capture photos and photo library access to save and manage your wish photos. These permissions are used solely for the app's core functionality.</p>
-            <p><strong>Location access.</strong> If you enable the location watermark feature, WannaCam accesses your location only at the moment of capture to stamp the location name on your photo card. Location data is stored locally on your device and is never transmitted.</p>
+        <!-- Simplified Chinese -->
+        <div class="lang" id="lang-zh-Hans">
+            <div class="card">
+                <h2>技术支持</h2>
+                <p>感谢你使用想要相机！如果你遇到任何问题或有建议，请随时联系我们。我们通常会在 24 小时内回复。</p>
+            </div>
+            <div class="card">
+                <h2>常见问题</h2>
+                <ul>
+                    <li><strong>想要相机需要联网吗？</strong><br>不需要。想要相机完全离线运行，所有数据都保存在你的设备上。</li>
+                    <li><strong>我的照片保存在哪里？</strong><br>照片保存在设备的系统相册中，同时通过 App 内的心愿清单进行本地管理。</li>
+                    <li><strong>删除的照片可以恢复吗？</strong><br>删除后，照片会同时从 App 和系统相册中移除，此操作不可撤销。</li>
+                    <li><strong>如何切换语言？</strong><br>想要相机会自动跟随系统语言，支持英语、简体中文和繁体中文。</li>
+                    <li><strong>如何分享心愿清单？</strong><br>在清单中选择宝贝，点击"生成长图"，然后从系统相册发送即可。</li>
+                </ul>
+            </div>
+            <div class="card privacy-section">
+                <h2>隐私政策</h2>
+                <p>想要相机尊重你的隐私。以下是我们的承诺：</p>
+                <p><strong>不收集任何数据。</strong>想要相机不会收集、存储或传输任何个人信息。App 完全离线运行。</p>
+                <p><strong>无分析和追踪。</strong>我们不使用任何第三方分析工具、广告 SDK 或追踪工具。</p>
+                <p><strong>无需注册账号。</strong>你无需创建账号或提供任何个人信息即可使用全部功能。</p>
+                <p><strong>仅本地存储。</strong>所有照片、心愿条目、标签和备注都仅存储在你的设备上，使用 Apple Core Data 框架，数据不会离开你的设备。</p>
+                <p><strong>相机和相册权限。</strong>想要相机请求相机权限用于拍照，请求相册权限用于保存和管理心愿照片。这些权限仅用于 App 的核心功能。</p>
+                <p><strong>位置权限。</strong>如果你开启了位置水印功能，想要相机仅在拍照瞬间获取位置信息，用于在卡片上标记地点名称。位置数据仅保存在你的设备上，不会被传输。</p>
+            </div>
+            <div class="card center">
+                <h2>联系我们</h2>
+                <p style="margin-bottom: 20px; color: #555;">期待你的反馈与建议。</p>
+                <a href="mailto:wannacam.app@gmail.com" class="contact-btn">发送邮件</a>
+            </div>
         </div>
 
-        <div class="card center">
-            <h2>Contact Us</h2>
-            <p style="margin-bottom: 20px; color: #555;">We'd love to hear from you.</p>
-            <a href="mailto:wannacam.app@gmail.com" class="contact-btn">Email Us</a>
+        <!-- Traditional Chinese -->
+        <div class="lang" id="lang-zh-Hant">
+            <div class="card">
+                <h2>技術支援</h2>
+                <p>感謝你使用想要相機！如果你遇到任何問題或有建議，請隨時聯繫我們。我們通常會在 24 小時內回覆。</p>
+            </div>
+            <div class="card">
+                <h2>常見問題</h2>
+                <ul>
+                    <li><strong>想要相機需要聯網嗎？</strong><br>不需要。想要相機完全離線運行，所有資料都儲存在你的裝置上。</li>
+                    <li><strong>我的照片儲存在哪裡？</strong><br>照片儲存在裝置的系統相簿中，同時透過 App 內的心願清單進行本地管理。</li>
+                    <li><strong>刪除的照片可以恢復嗎？</strong><br>刪除後，照片會同時從 App 和系統相簿中移除，此操作不可撤銷。</li>
+                    <li><strong>如何切換語言？</strong><br>想要相機會自動跟隨系統語言，支援英語、簡體中文和繁體中文。</li>
+                    <li><strong>如何分享心願清單？</strong><br>在清單中選擇寶貝，點擊「生成長圖」，然後從系統相簿傳送即可。</li>
+                </ul>
+            </div>
+            <div class="card privacy-section">
+                <h2>隱私政策</h2>
+                <p>想要相機尊重你的隱私。以下是我們的承諾：</p>
+                <p><strong>不蒐集任何資料。</strong>想要相機不會蒐集、儲存或傳輸任何個人資訊。App 完全離線運行。</p>
+                <p><strong>無分析和追蹤。</strong>我們不使用任何第三方分析工具、廣告 SDK 或追蹤工具。</p>
+                <p><strong>無需註冊帳號。</strong>你無需建立帳號或提供任何個人資訊即可使用全部功能。</p>
+                <p><strong>僅本地儲存。</strong>所有照片、心願條目、標籤和備註都僅儲存在你的裝置上，使用 Apple Core Data 框架，資料不會離開你的裝置。</p>
+                <p><strong>相機和相簿權限。</strong>想要相機請求相機權限用於拍照，請求相簿權限用於儲存和管理心願照片。這些權限僅用於 App 的核心功能。</p>
+                <p><strong>位置權限。</strong>如果你開啟了位置浮水印功能，想要相機僅在拍照瞬間取得位置資訊，用於在卡片上標記地點名稱。位置資料僅儲存在你的裝置上，不會被傳輸。</p>
+            </div>
+            <div class="card center">
+                <h2>聯繫我們</h2>
+                <p style="margin-bottom: 20px; color: #555;">期待你的回饋與建議。</p>
+                <a href="mailto:wannacam.app@gmail.com" class="contact-btn">傳送郵件</a>
+            </div>
         </div>
 
         <div class="footer">
             <p>&copy; 2026 WannaCam. All rights reserved.</p>
         </div>
     </div>
+
+    <script>
+        function switchLang(lang) {
+            document.querySelectorAll('.lang').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.lang-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById('lang-' + lang).classList.add('active');
+            event.target.classList.add('active');
+
+            var subtitles = {
+                'en': 'Snap it. Tag it. Want it.',
+                'zh-Hans': '记录你的每一个想要！',
+                'zh-Hant': '記錄你的每一個想要！'
+            };
+            document.getElementById('subtitle').textContent = subtitles[lang];
+        }
+
+        // Auto-detect language
+        (function() {
+            var userLang = navigator.language || navigator.userLanguage || 'en';
+            if (userLang.startsWith('zh-Hant') || userLang === 'zh-TW' || userLang === 'zh-HK') {
+                switchLangDirect('zh-Hant');
+            } else if (userLang.startsWith('zh')) {
+                switchLangDirect('zh-Hans');
+            }
+        })();
+
+        function switchLangDirect(lang) {
+            document.querySelectorAll('.lang').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.lang-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById('lang-' + lang).classList.add('active');
+            document.querySelectorAll('.lang-btn').forEach(el => {
+                if ((lang === 'en' && el.textContent === 'English') ||
+                    (lang === 'zh-Hans' && el.textContent === '简体中文') ||
+                    (lang === 'zh-Hant' && el.textContent === '繁體中文')) {
+                    el.classList.add('active');
+                }
+            });
+            var subtitles = {
+                'en': 'Snap it. Tag it. Want it.',
+                'zh-Hans': '记录你的每一个想要！',
+                'zh-Hant': '記錄你的每一個想要！'
+            };
+            document.getElementById('subtitle').textContent = subtitles[lang];
+        }
+    </script>
 </body>
 </html>
